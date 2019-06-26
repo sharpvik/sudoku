@@ -3,6 +3,7 @@ package main
 import (
     "fmt"
     "os"
+    "time"
 )
 
 
@@ -23,12 +24,19 @@ func main() {
     }
     
     b.Print()
+    
+    s := time.Now()
     b, ok := b.JustSolveIt()
+    f := time.Now()
+    elapsed := f.Sub(s)
+    
     if !ok {
         fmt.Println("ERROR: CANNOT SOLVE PUZZLE.")
         os.Exit(1)
     }
     b.Print()
+    
+    fmt.Printf("%v taken to solve the puzzle.\n\n", elapsed)
     
     if len(os.Args) == 3 {
         writeto := os.Args[2]
